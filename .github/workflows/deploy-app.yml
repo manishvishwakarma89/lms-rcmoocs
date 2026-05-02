@@ -19,5 +19,9 @@ jobs:
 
         - name: deploy with docker compose 
           run: docker compose down && docker compose up -d --build --force-recreate  
-                 
-
+        
+        - name: Run migrations
+          run: | 
+            docker compose exec web python manage.py migrate
+            docker compose exec web python manage.py runserver
+            
