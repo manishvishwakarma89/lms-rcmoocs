@@ -1,6 +1,7 @@
 services:
   db:
     image: postgres:17
+    restart: always
     volumes:
        - postgres_data:/var/lib/postgresql/data/
     environment:
@@ -12,22 +13,27 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
   web:
     build: .
-    command: |
-            sh -c "python manage.py migrate &&
-            gunicorn django_lms.wsgi:application --bind 0.0.0.0:8000"
-
+    restart: always
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             gunicorn django_lms.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120"
     volumes:
       - .:/app
     ports:
-      - "8000:8000"
+      - "0.0.0.0:8000:8000"
     environment:
       - DB_NAME=django_db
       - DB_USER=django_user
       - DB_PASSWORD=django_password
       - DB_HOST=db
       - DB_PORT=5432
+      - ALLOWED_HOSTS=*
+      - DEBUG=False
     depends_on:
       db:
         condition: service_healthy
