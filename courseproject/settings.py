@@ -30,7 +30,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # whitenoise removed - not installed
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -102,8 +101,6 @@ STATICFILES_DIRS = [
     d for d in [BASE_DIR / "static"]
     if d.exists()
 ]
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
-# no STATICFILES_STORAGE - using Django default
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
@@ -136,4 +133,3 @@ SOCIALACCOUNT_PROVIDERS = {
         'SCOPE': ['user', 'repo', 'read:org'],
     }
 }
-
