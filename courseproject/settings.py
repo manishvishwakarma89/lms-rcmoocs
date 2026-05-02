@@ -102,7 +102,7 @@ STATICFILES_DIRS = [
     d for d in [BASE_DIR / "static"]
     if d.exists()
 ]
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 # no STATICFILES_STORAGE - using Django default
 
 MEDIA_URL = "/media/"
