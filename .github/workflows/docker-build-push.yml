@@ -33,7 +33,7 @@ jobs:
           file: ./Dockerfile # Optional if named "Dockerfile" and in root
           push: true
           tags: |
-               ${{ secrets.DOCKER_USERNAME }}/lms-rcmoocs:${{ env.BRANCH_NAME }}
+               ${{ secrets.DOCKER_USERNAME }}/lms-rcmoocs:${{ github.ref_name }}
                ${{ secrets.DOCKER_USERNAME }}/lms-rcmoocs:${{ github.sha }}
                ${{ secrets.DOCKER_USERNAME }}/lms-rcmoocs:latest
 
