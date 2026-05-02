@@ -6,7 +6,7 @@ jobs:
     deploy:
         env:
            DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
-           DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD}}
+           
 
         runs-on: self-hosted
 
@@ -18,10 +18,7 @@ jobs:
           uses: docker/setup-compose-action@v2 
 
         - name: Deploy with docker compose
-          run: |
-            pwd
-            ls -R
-            cd Lms-Rcmoocs
-            docker compose down
-            docker compose up -d --build --force-recreate
+          run: docker compose up -d --build
+
+            
             
