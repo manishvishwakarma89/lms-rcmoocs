@@ -10,3 +10,4 @@ sqlparse>=0.4.4
 cryptography
 PyJWT
 gunicorn
+psycopg2-binary>=2.9
