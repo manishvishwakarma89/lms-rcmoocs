@@ -103,7 +103,6 @@ STATICFILES_DIRS = [
     d for d in [BASE_DIR / "static", BASE_DIR / "courseproject/static"]
     if d.exists()
 ]
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
