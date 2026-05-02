@@ -35,6 +35,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # serves static files in production
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -44,9 +45,8 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-# ✅ FIXED: match your actual wsgi module name
-ROOT_URLCONF = 'django_lms.urls'
-WSGI_APPLICATION = 'django_lms.wsgi.application'
+ROOT_URLCONF = 'courseproject.urls'
+WSGI_APPLICATION = 'courseproject.wsgi.application'
 
 TEMPLATES = [
     {
@@ -71,7 +71,6 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-# ✅ FIXED: removed duplicate NAME key and sqlite ENGINE
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -97,8 +96,14 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'django_lms/static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # ✅ renamed to avoid conflict
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    d for d in [
+        os.path.join(BASE_DIR, 'courseproject/static'),
+        os.path.join(BASE_DIR, 'static'),
+    ] if os.path.exists(d)
+]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
