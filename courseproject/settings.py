@@ -30,7 +30,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # whitenoise removed - not installed
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -40,7 +40,6 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-# ✅ correct module name
 ROOT_URLCONF = 'courseproject.urls'
 WSGI_APPLICATION = 'courseproject.wsgi.application'
 
@@ -100,9 +99,10 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [
-    d for d in [BASE_DIR / "static", BASE_DIR / "courseproject/static"]
+    d for d in [BASE_DIR / "static"]
     if d.exists()
 ]
+# no STATICFILES_STORAGE - using Django default
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
@@ -135,3 +135,4 @@ SOCIALACCOUNT_PROVIDERS = {
         'SCOPE': ['user', 'repo', 'read:org'],
     }
 }
+
