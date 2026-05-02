@@ -49,8 +49,8 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-ROOT_URLCONF = 'courseproject.urls'
-WSGI_APPLICATION = 'courseproject.wsgi.application'
+ROOT_URLCONF = 'djandjango_lms.urls'
+WSGI_APPLICATION = 'django_lms.wsgi.application'
 
 # 🎨 TEMPLATES
 TEMPLATES = [
