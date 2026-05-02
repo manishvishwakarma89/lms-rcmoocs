@@ -6,7 +6,7 @@ jobs:
     deploy:
         env:
            DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
-           DOCKER_TAG: ${{ github.event.workflow_run.head_sha }}
+           DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD}}
 
         runs-on: self-hosted
 
