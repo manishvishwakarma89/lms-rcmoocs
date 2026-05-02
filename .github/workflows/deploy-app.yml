@@ -17,8 +17,11 @@ jobs:
         - name: Set up Docker Compose (optional, usually pre-installed on ubuntu-latest runners)
           uses: docker/setup-compose-action@v2 
 
-        - name: Deploy
+        - name: Deploy with docker compose
           run: |
+            pwd
+            ls -R
+            cd Lms-Rcmoocs
             docker compose down
             docker compose up -d --build --force-recreate
             
