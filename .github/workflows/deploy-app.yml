@@ -17,23 +17,7 @@ jobs:
         - name: Set up Docker Compose (optional, usually pre-installed on ubuntu-latest runners)
           uses: docker/setup-compose-action@v2 
 
-        - name: Deploy with Docker Compose
-          run: |
-                docker compose down
-                docker compose up -d --build
-
-        - name: Wait for containers to be healthy
-          run: sleep 15
-
-        - name: Run migrations
-          run: docker compose exec web python manage.py migrate
-
-        - name: Collect static files
-          run: docker compose exec web python manage.py collectstatic --noinput
-
-        - name: Show logs (for debugging)
-          if: failure()
-          run: docker compose logs web --tail=50
-
+        - name: deploy with docker compose 
+          run: docker compose down && docker compose up -d --build --force-recreate  
                  
 
