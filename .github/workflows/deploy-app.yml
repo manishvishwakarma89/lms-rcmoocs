@@ -1,0 +1,17 @@
+name: Deploy Django LMS APP
+
+on:
+    workflow_dispatch:
+jobs:        
+    deploy:
+        env:
+            DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
+            DOCKER_TAG: ${{ github.event.workflow_run.head_sha }}
+
+        runs-on: self-hosted
+
+        steps:
+        - name: checkout code
+          uses: actions/checkout@v4
+        - name: Deploy with docker compose
+          run: docker compose up -d --build
