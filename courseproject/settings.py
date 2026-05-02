@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-ROOT_URLCONF = 'djandjango_lms.urls'
+ROOT_URLCONF = 'django_lms.urls'
 WSGI_APPLICATION = 'django_lms.wsgi.application'
 
 # 🎨 TEMPLATES
